@@ -1,0 +1,21 @@
+class Solution {
+public:
+    struct CmpByValue {  
+        bool operator()(const pair<int, int>& lhs, const pair<int, int>& rhs) {  
+        return lhs.second > rhs.second;  
+        }  
+    };
+    vector<int> topKFrequent(vector<int>& nums, int k) {
+        vector<int> res;
+        unordered_map<int, int> numsCount;
+        for(int i=0; i<nums.size(); i++){
+            numsCount[nums[i]]++;
+        }
+        vector<pair<int, int> > vecCount(numsCount.begin(), numsCount.end());
+        sort(vecCount.begin(), vecCount.end(), CmpByValue());
+        for(int i=0; i<k; i++){
+            res.push_back(vecCount[i].first);
+        }
+        return res;
+    }
+};
