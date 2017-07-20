@@ -1,0 +1,24 @@
+class Solution {
+public:
+    struct CmpByValue {  
+        bool operator()(const pair<char, int>& lhs, const pair<char, int>& rhs) {  
+        return lhs.second < rhs.second;  
+        }  
+    };
+    string frequencySort(string s) {
+        string res;
+        map<char, int> charFreq;        
+        for(int i=0; i<s.size(); i++){
+            charFreq[s[i]]++;
+        }
+        vector<pair<char, int> > vecFreq(charFreq.begin(), charFreq.end());
+        sort(vecFreq.begin(), vecFreq.end(), CmpByValue());
+        for(int i=vecFreq.size()-1; i>=0; i--){
+            for(int j=0; j<vecFreq[i].second; j++)
+                res += vecFreq[i].first;
+        }
+        
+        return res;
+    }
+   
+};
