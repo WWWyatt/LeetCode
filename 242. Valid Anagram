@@ -1,0 +1,25 @@
+class Solution {
+public:
+    bool isAnagram(string s, string t) {
+        if(s.size()!=t.size()) return false;
+        unordered_map<char, int> m1;
+        unordered_map<char, int> m2;
+        for(int i=0; i<s.size(); i++){
+            m1[s[i]]++;
+            m2[t[i]]++;
+        }       
+        if(m1.size()!=m2.size()) return false;
+        unordered_map<char, int>::iterator iter; 
+        for(iter=m2.begin(); iter!=m2.end(); iter++){
+            unordered_map<char, int>::iterator iter2 = m1.find(iter->first);
+            if(iter2!=m1.end()){
+                if(iter->second!=iter2->second){
+                    return false;
+                }
+            }else{
+                return false;
+            }
+        }
+        return true;
+    }
+};
