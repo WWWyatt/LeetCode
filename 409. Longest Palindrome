@@ -1,0 +1,17 @@
+class Solution {
+public:
+    int longestPalindrome(string s) {
+        int count=0;
+        unordered_map<char, int> mm;
+        for(int i=0; i<s.size(); i++){
+            mm[s[i]]++;
+        }
+        unordered_map<char, int>::iterator iter;
+        for(iter = mm.begin(); iter != mm.end(); ++iter){            
+            if(iter->second%2==1)
+                count++;            
+        }
+        if(count==0) return s.size();
+        return s.size()-count+1;
+    }
+};
