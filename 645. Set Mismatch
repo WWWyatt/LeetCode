@@ -1,0 +1,27 @@
+class Solution {
+public:
+    vector<int> findErrorNums(vector<int>& nums) {
+        vector<int> res;
+        if(nums.size()==0) return nums;
+        unordered_map<int, int> mm;
+        for(int i=0; i<nums.size(); i++){
+            mm[nums[i]]++;
+        }
+        unordered_map<int, int>::iterator iter;
+        for(iter=mm.begin(); iter!=mm.end(); iter++){
+            if(iter->second>1){
+                res.push_back(iter->first);
+                //num.erase()
+                break;
+            }
+        }
+        sort(nums.begin(), nums.end());
+        for(int i=0; i<nums.size(); i++){
+            if(mm.count(i+1)==0){
+                res.push_back(i+1);
+                break;
+            }
+        }
+        return res;
+    }
+};
