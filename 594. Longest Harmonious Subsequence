@@ -1,0 +1,22 @@
+class Solution {
+public:
+    int findLHS(vector<int>& nums) {
+        int res=0;
+        map<int, int> mm;
+        sort(nums.begin(), nums.end());
+        for(int i=0; i<nums.size(); i++){
+            mm[nums[i]]++;
+        }
+        map<int, int>::iterator iter, iter2;
+        for(iter=mm.begin(); iter!=mm.end();){
+            iter2=iter;
+            iter++;
+            if(iter==mm.end()) break;
+            if(iter->first==(iter2 )->first+1){
+                res = max(res, iter->second+(iter2)->second);
+            }
+            //if(iter==mm.end()) break;
+        }
+        return res;
+    }
+};
